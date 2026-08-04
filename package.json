@@ -1,0 +1,21 @@
+{
+  "name": "playwright-and-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braiancarrizo24/Playwright-and-Typescript.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/braiancarrizo24/Playwright-and-Typescript/issues"
+  },
+  "homepage": "https://github.com/braiancarrizo24/Playwright-and-Typescript#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.1.2"
+  }
+}
