@@ -214,6 +214,24 @@ import { test, Browser, Page, expect } from '@playwright/test';
             })
  
         })
+
+        test('Validating within a pop-up', async ({ page }) => {
+            await test.step('Given that Im browsing the Free Range Testers automation sandbox', async () => {
+                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
+            })
+ 
+            await test.step('When I click on the pop-up button', async () => {
+                await page.getByRole('button', { name: 'Mostrar popup' }).click();
+            })
+ 
+            await test.step('I can validate an element within the pop-up ', async () => {
+                await expect(page.getByText('¿Viste? ¡Apareció un Pop-up!')).toHaveText('¿Viste? ¡Apareció un Pop-up!');
+                await page.getByRole('button', { name: 'Cerrar' }).click();
+ 
+            })
+ 
+ 
+        })
              
 
         
