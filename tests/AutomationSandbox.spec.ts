@@ -158,21 +158,46 @@ import { test, Browser, Page, expect } from '@playwright/test';
             
         })
 
-        test('Valido la columna Nombres de la tabla estática', async ({ page }) => {
-            await test.step('Dado que navego al Sandbox de Automation de Free Range Testers', async () => {
-                await page.goto('');
+        test('I validated the Names column in the static table', async ({ page }) => {
+            await test.step('Given that Im browsing the Free Range Testers automation sandbox', async () => {
+                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
             })
  
-            await test.step('Puedo validar los elementos para la columna Nombre de la tabla estática', async () => {
+            await test.step('I can validate the entries for the Name column in the static table', async () => {
                 const valoresColumnaNombres = await page.$$eval('h2:has-text("Tabla estática") + table tbody tr td:nth-child(2)', elements => elements.map(element => element.textContent));
                 const nombresEsperados = ['Messi', 'Ronaldo', 'Mbappe'];
-                //Saca una screen y la adjunta aunque el caso pase.
+                
                 await test.info().attach('screenshot', {
                     body: await page.screenshot(),
                     contentType: 'image/png',
                 })
                 expect(valoresColumnaNombres).toEqual(nombresEsperados);
             })
+ 
+        })
+
+        test('It is true that all values in the pivot table change after a reload', async ({ page }) => {
+            await test.step('Given that Im browsing the Free Range Testers automation sandbox', async () => {
+                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
+            })
+ 
+            await test.step('Its true that the values changed when the webpage was reloaded', async () => {
+                //Create an array containing all the values from the pivot table
+                const valoresTablaDinamica = await page.$$eval('h2:has-text("Tabla dinámica") + table tbody tr td', elements => elements.map(element => element.textContent));
+                console.log(valoresTablaDinamica);
+ 
+                //I’m topping up so that the values can be updated
+                await page.reload();
+ 
+                //Create a second array containing the values after the reload
+                const valoresPostReload = await page.$$eval('h2:has-text("Tabla dinámica") + table tbody tr td', elements => elements.map(element => element.textContent));
+                console.log(valoresPostReload);
+ 
+                //Check that all the values have changed for each cell.
+                expect(valoresTablaDinamica).not.toEqual(valoresPostReload);
+ 
+            })
+ 
  
         })
              
