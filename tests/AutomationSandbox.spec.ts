@@ -200,6 +200,20 @@ import { test, Browser, Page, expect } from '@playwright/test';
  
  
         })
+
+        test('Example of Soft AssertionsExample of Soft Assertions', async ({ page }) => {
+            await test.step('Given that Im browsing the Free Range Testers automation sandbox', async () => {
+                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
+            })
+            await test.step('I confirm that all the elements in the checkboxes are correct', async () => {
+                await expect.soft(page.getByText('Pizzaa 🍕'), 'No se encontró el elemento Pizza 🍕').toBeVisible();
+                await expect.soft(page.getByText('Hamburguesa 🍔'), 'No se encontró el elemento Hamburguesa 🍔').toBeVisible();
+                await expect.soft(page.getByText('Pasta 🍝'), 'No se encontró el elemento Pasta 🍝').toBeVisible();
+                await expect.soft(page.getByText('Heladoa 🍧'), 'No se encontró el elemento Helado 🍧').toBeVisible();
+                await expect.soft(page.getByText('Torta 🍰'), 'No se encontró el elemento Torta 🍰').toBeVisible();
+            })
+ 
+        })
              
 
         
